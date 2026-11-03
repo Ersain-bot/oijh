@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chess Analysis Tool</title>
+<link rel="stylesheet" href="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="container">
+  <section class="board-section">
+    <div class="eval-bar" id="eval-bar"><div id="eval-fill"></div><span id="eval-label">0.0</span></div>
+    <div class="board-col">
+      <div class="board-wrap">
+        <div id="board"></div>
+        <svg id="arrows" viewBox="0 0 8 8" aria-hidden="true">
+          <defs><marker id="head" viewBox="0 0 4 4" refX="2.4" refY="2" markerWidth="2.2" markerHeight="2.2" orient="auto"><path d="M0 0L4 2L0 4z" fill="#e0a84a"/></marker></defs>
+          <line id="arrow" x1="0" y1="0" x2="0" y2="0" visibility="hidden" stroke="#e0a84a" stroke-width=".2" stroke-opacity=".85" marker-end="url(#head)"/>
+        </svg>
+      </div>
+      <div class="nav">
+        <button id="first" title="В начало (Home)">⏮</button>
+        <button id="prev" title="Назад (←)">◀</button>
+        <button id="next" title="Вперёд (→)">▶</button>
+        <button id="last" title="В конец (End)">⏭</button>
+        <button id="flip" title="Перевернуть (F)">⇅ Перевернуть</button>
+      </div>
+    </div>
+  </section>
+
+  <aside class="sidebar">
+    <div class="panel">
+      <div class="head">
+        <h2>Оценка <span id="eval-score">0.00</span></h2>
+        <span id="depth-info" class="muted"></span>
+      </div>
+      <div class="lines" id="engine-lines">
+        <div class="line" id="line-1">Загрузка движка…</div>
+        <div class="line" id="line-2"></div>
+        <div class="line" id="line-3"></div>
+      </div>
+      <div class="row">
+        <label class="inline"><input type="checkbox" id="engine-on" checked> Движок</label>
+        <label class="inline">Глубина <input type="range" id="depth" min="8" max="22" value="16"> <b id="depth-val">16</b></label>
+        <label class="inline">Превращение
+          <select id="promo"><option value="q">Ферзь</option><option value="r">Ладья</option><option value="b">Слон</option><option value="n">Конь</option></select>
+        </label>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>Ходы</h3>
+      <div id="moves" class="moves"><span class="muted">Сделайте ход или загрузите партию</span></div>
+    </div>
+
+    <div class="panel">
+      <h3>Позиция</h3>
+      <div class="input-group">
+        <label for="fen-input">FEN</label>
+        <input type="text" id="fen-input" spellcheck="false">
+        <button id="load-fen-btn">Загрузить FEN</button>
+      </div>
+      <div class="input-group">
+        <label for="pgn-input">PGN</label>
+        <textarea id="pgn-input" rows="4" spellcheck="false" placeholder="Вставьте PGN партии"></textarea>
+        <button id="load-pgn-btn">Загрузить PGN</button>
+      </div>
+      <p id="msg" class="muted" role="status"></p>
+      <button id="reset-btn" class="secondary-btn">Сбросить доску</button>
+    </div>
+  </aside>
+</main>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+<script src="https://unpkg.com/@chrisoakman/chessboardjs@1.0.0/dist/chessboard-1.0.0.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
